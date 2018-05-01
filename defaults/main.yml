@@ -13,6 +13,7 @@ easy_rsa_key_ou: "MyOrganizationalUnit"
 easy_rsa_key_province: "CA"
 easy_rsa_key_size: 2048
 easy_rsa_dir: "/opt/easy-rsa"
+easy_rsa_crl_days: 1800
 
 easy_rsa_ca_dir: /etc/easy-rsa
 easy_rsa_key_dir: "{{ easy_rsa_ca_dir }}/keys"
