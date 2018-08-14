@@ -101,7 +101,7 @@
 
 - name: Generate client certificates and keys
   become: yes
-  shell: "./easyrsa gen-req {{ item }} nopass"
+  shell: "./easyrsa --batch gen-req {{ item }} nopass"
   args:
     chdir: "{{ easy_rsa_ca_dir }}"
     creates: "{{ easy_rsa_key_dir }}/private/{{ item }}.key"
