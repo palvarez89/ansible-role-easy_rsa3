@@ -83,9 +83,9 @@
 
 - name: Generate Diffie-Hellman parameters
   become: yes
-  shell: "openssl dhparam -out {{ easy_rsa_key_dir }}/dh{{ easy_rsa_key_size }}.pem {{ easy_rsa_key_size }}"
+  shell: "openssl dhparam -out dh{{ easy_rsa_key_size }}.pem {{ easy_rsa_key_size }}"
   args:
-    chdir: "{{ easy_rsa_ca_dir }}"
+    chdir: "{{ easy_rsa_key_dir }}"
     creates: "{{ easy_rsa_key_dir }}/dh{{ easy_rsa_key_size }}.pem"
   tags:
     - easy_rsa
