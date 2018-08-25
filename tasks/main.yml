@@ -56,7 +56,7 @@
 
 - name: Create ca.key
   become: yes
-  shell: "yes '' | ./easyrsa build-ca nopass"
+  shell: "./easyrsa --batch build-ca nopass"
   args:
     chdir: "{{ easy_rsa_ca_dir }}"
     creates: "{{ easy_rsa_key_dir }}/private/ca.key"
@@ -65,7 +65,7 @@
 
 - name: Create server.key
   become: yes
-  shell: "yes '' | ./easyrsa gen-req {{ easy_rsa_key_name }} nopass"
+  shell: "./easyrsa --batch --req-cn={{ easy_rsa_key_name }} gen-req {{ easy_rsa_key_name }} nopass"
   args:
     chdir: "{{ easy_rsa_ca_dir }}"
     creates: "{{ easy_rsa_key_dir }}/private/{{ easy_rsa_key_name }}.key"
@@ -74,7 +74,7 @@
 
 - name: Sign server key
   become: yes
-  shell: "echo yes | ./easyrsa sign-req server {{ easy_rsa_key_name }}"
+  shell: "./easyrsa --batch sign-req server {{ easy_rsa_key_name }}"
   args:
     chdir: "{{ easy_rsa_ca_dir }}"
     creates: "{{ easy_rsa_key_dir }}/issued/{{ easy_rsa_key_name }}.crt"
@@ -101,7 +101,7 @@
 
 - name: Generate client certificates and keys
   become: yes
-  shell: "./easyrsa gen-req {{ item }} nopass"
+  shell: "./easyrsa --batch --req-cn={{ item }} gen-req {{ item }} nopass"
   args:
     chdir: "{{ easy_rsa_ca_dir }}"
     creates: "{{ easy_rsa_key_dir }}/private/{{ item }}.key"
